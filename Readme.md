@@ -106,3 +106,4 @@ CUDA_VISIBLE_DEVICES=1,3 python -m torch.distributed.launch --nproc_per_node=2 d
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 dist_test_gan.py --batch-size 30 --dataset mini-imagenet --g-weights ./weights/latest.pth --num-shot 30
 ```
+# CCT-Net
