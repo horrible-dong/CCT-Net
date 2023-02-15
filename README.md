@@ -1,4 +1,4 @@
-# Comparison Knowledge Translation for Generalizable Image Classification（CCT-Net）
+# Comparison Knowledge Translation for Generalizable Image Classification (CCT-Net)
 
 Official implementation
 
