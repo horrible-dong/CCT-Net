@@ -1,7 +1,6 @@
 # Comparison Knowledge Translation for Generalizable Image Classification (CCT-Net)
 
 > Official implementation
-
 > [[paper link (ijcai.org)]](https://www.ijcai.org/proceedings/2022/0411.pdf) / [[paper link (arXiv)]](https://arxiv.org/abs/2205.03633)
 
 ## Abstract
