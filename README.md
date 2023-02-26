@@ -29,7 +29,7 @@ dataset/
       └── image_n
    ├── class_2/
    ├── class_3/
-   ├── ...
+   ├── ...    /
    └── class_n/
 ```
 Then, add all the category names into `classes.py`.
