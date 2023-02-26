@@ -21,14 +21,16 @@ pip install -r requirements.txt
 It is quite convenient to prepare benchmark datasets or custom datasets by following these steps:
 Firstly, make each dataset in a unified **imagefolder** format:
 ```
-├── dataset
-│   ├── class_1
-│   │   ├── image_1
-│   │   ├── image_2
-│   │   ├── ...
-│   ├── class_2
-│   ├── class_3
-│   ├── ...
+dataset/
+   ├── class_1/
+      ├── image_1
+      ├── image_2
+      ├── ...
+      └── image_n
+   ├── class_2/
+   ├── class_3/
+   ├── ...
+   └── class_n/
 ```
 Then, add all the category names into `classes.py`.
 After that, use the APIs in `utils/make_datasets.py` to convert the original imagefolder to what we need, including source, target (labelled and unlabelled), validation, and test dataset. 
@@ -38,26 +40,26 @@ After that, use the APIs in `utils/make_datasets.py` to convert the original ima
 To train the CCT-Net, run `dist_train_gan.py`.
 
 Arguments:
-`--local_rank`: system automatic allocation
-`--device`: default: 'cuda'
-`--batch-size`
-`--epochs`
-`--g-steps`: steps of the comparison classifier in each iteration
-`--d-steps`: steps of the matching discriminator in each iteration
-`--g-fs-tgt-steps`: steps of the comparison classifier for labelled target samples in each iteration
-`--lr`: learning rate
-`--lrf`: final learning rate, for cosine annealing
-`--eval-interval`
-`--unsup`: whether to use the unsupervised mechanism
-`--data-root`: e.g. ./datasets/
-`--dataset`: e.g. mini-imagenet
-`--sub`: sub-dataset for different tasks e.g. src50-tgt50, 20-shot-src50-tgt50
-`--fs`: whether to train few-shot target, action="store_true"
-`--g-weights`: e.g. ./weights/latest.pth
-`--d-weights`: same as `--g-weights`
-`--do-not-save`: action="store_true"
-`--saving-interval`
-`--remarks`: to take a note
+`--local_rank`: system automatic allocation  
+`--device`: default: 'cuda'  
+`--batch-size`  
+`--epochs`  
+`--g-steps`: steps of the comparison classifier in each iteration  
+`--d-steps`: steps of the matching discriminator in each iteration  
+`--g-fs-tgt-steps`: steps of the comparison classifier for labelled target samples in each iteration  
+`--lr`: learning rate  
+`--lrf`: final learning rate, for cosine annealing  
+`--eval-interval`  
+`--unsup`: whether to use the unsupervised mechanism  
+`--data-root`: e.g. ./datasets/  
+`--dataset`: e.g. mini-imagenet  
+`--sub`: sub-dataset for different tasks e.g. src50-tgt50, 20-shot-src50-tgt50  
+`--fs`: whether to train few-shot target, action="store_true"  
+`--g-weights`: e.g. ./weights/latest.pth  
+`--d-weights`: same as `--g-weights`  
+`--do-not-save`: action="store_true"  
+`--saving-interval`  
+`--remarks`: to take a note 
 
 For example,
 ```bash
@@ -67,21 +69,21 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 To train the Comparison Classifier part, run `dist_train_g.py`
 
 Arguments:
-`--local_rank`: system automatic allocation
-`--device`: default: 'cuda'
-`--batch-size`
-`--epochs`
-`--lr`: learning rate
-`--lrf`: final learning rate, for cosine annealing
-`--eval-interval`
-`--unsup`: whether to use the unsupervised mechanism
-`--data-root`: e.g. ./datasets/
-`--dataset`: e.g. mini-imagenet
-`--sub`: sub-dataset for different tasks e.g. src50-tgt50, 20-shot-src50-tgt50
-`--fs`: whether to train few-shot target, action="store_true"
-`--g-weights`: e.g. ./weights/latest.pth
-`--do-not-save`: action="store_true"
-`--saving-interval`
+`--local_rank`: system automatic allocation  
+`--device`: default: 'cuda'  
+`--batch-size`  
+`--epochs`  
+`--lr`: learning rate  
+`--lrf`: final learning rate, for cosine annealing  
+`--eval-interval`  
+`--unsup`: whether to use the unsupervised mechanism  
+`--data-root`: e.g. ./datasets/  
+`--dataset`: e.g. mini-imagenet  
+`--sub`: sub-dataset for different tasks e.g. src50-tgt50, 20-shot-src50-tgt50  
+`--fs`: whether to train few-shot target, action="store_true"  
+`--g-weights`: e.g. ./weights/latest.pth  
+`--do-not-save`: action="store_true"  
+`--saving-interval`  
 `--remarks`: to take a note
 
 For example,
@@ -94,13 +96,13 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 To evaluate the CCT-Net, run `dist_test_gan.py`:
 
 Arguments:
-`--local_rank`: system automatic allocation
-`--device`: default: 'cuda'
-`--batch-size`
-`--num-shot`: number of representatives in each category
-`--data-root`: e.g. ./datasets/
-`--dataset`: e.g. mini-imagenet
-`--g-weights`: e.g. ./weights/latest.pth
+`--local_rank`: system automatic allocation  
+`--device`: default: 'cuda'  
+`--batch-size`  
+`--num-shot`: number of representatives in each category  
+`--data-root`: e.g. ./datasets/  
+`--dataset`: e.g. mini-imagenet  
+`--g-weights`: e.g. ./weights/latest.pth  
 `--id`: checkpoint id, expressed as a datetime
 
 For example,
