@@ -39,7 +39,7 @@ After that, use the APIs in `utils/make_datasets.py` to convert the original ima
 
 To train the CCT-Net, run `dist_train_gan.py`.
 
-Arguments:
+Arguments:  
 `--local_rank`: system automatic allocation  
 `--device`: default: 'cuda'  
 `--batch-size`  
@@ -68,7 +68,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 <br/>
 To train the Comparison Classifier part, run `dist_train_g.py`
 
-Arguments:
+Arguments:  
 `--local_rank`: system automatic allocation  
 `--device`: default: 'cuda'  
 `--batch-size`  
@@ -95,7 +95,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
 
 To evaluate the CCT-Net, run `dist_test_gan.py`:
 
-Arguments:
+Arguments:  
 `--local_rank`: system automatic allocation  
 `--device`: default: 'cuda'  
 `--batch-size`  
