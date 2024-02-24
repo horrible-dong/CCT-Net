@@ -1,11 +1,30 @@
-# Comparison Knowledge Translation for Generalizable Image Classification (CCT-Net)
+Comparison Knowledge Translation for Generalizable Image Classification (CCT-Net)
+=======
 
-> Official implementation  
-> [[paper link (ijcai.org)]](https://www.ijcai.org/proceedings/2022/0411.pdf) / [[paper link (arXiv)]](https://arxiv.org/abs/2205.03633)
+[![version](https://img.shields.io/badge/Conference-IJCAI_2022-ff69b4)](https://ijcai-22.org/)
+&emsp;![code](https://img.shields.io/badge/Code-Official-brightgreen)
+&emsp;![doc](https://img.shields.io/badge/Docs-Latest-orange)
+&emsp;[![license](https://img.shields.io/badge/License-MIT-blue)](https://github.com/horrible-dong/QTClassification/blob/main/LICENSE)
+
+> Authors: Zunlei Feng, Tian Qiu, Sai Wu, Xiaotuan Jin, Zengliang He, Mingli Song, Huiqiong Wang  
+> Affiliation: Zhejiang University  
+> Paper Link: [[arXiv]](https://arxiv.org/abs/2205.03633) / [[IJCAI]](https://www.ijcai.org/proceedings/2022/0411)
 
 ## Abstract
 
-Deep learning has recently achieved remarkable performance in image classification tasks, which depends heavily on massive annotation. However, the classification mechanism of existing deep learning models seems to contrast to humans' recognition mechanism. With only a glance at an image of the object even unknown type, humans can quickly and precisely find other same category objects from massive images, which benefits from daily recognition of various objects. In this paper, we attempt to build a generalizable framework that emulates the humans' recognition mechanism in the image classification task, hoping to improve the classification performance on unseen categories with the support of annotations of other categories. Specifically, we investigate a new task termed Comparison Knowledge Translation (CKT). Given a set of fully labeled categories, CKT aims to translate the comparison knowledge learned from the labeled categories to a set of novel categories. To this end, we put forward a Comparison Classification Translation Network (CCT-Net), which comprises a comparison classifier and a matching discriminator. The comparison classifier is devised to classify whether two images belong to the same category or not, while the matching discriminator works together in an adversarial manner to ensure whether classified results match the truth. Exhaustive experiments show that CCT-Net achieves surprising generalization ability on unseen categories and SOTA performance on target categories.
+Deep learning has recently achieved remarkable performance in image classification tasks, which depends heavily on
+massive annotation. However, the classification mechanism of existing deep learning models seems to contrast to human's
+recognition mechanism. With only a glance at an image of the object even unknown type, humans can quickly and precisely
+find other same category objects from massive images, which benefits from daily recognition of various objects. In this
+paper, we attempt to build a generalizable framework that emulates the humans' recognition mechanism in the image
+classification task, hoping to improve the classification performance on unseen categories with the support of
+annotations of other categories. Specifically, we investigate a new task termed Comparison Knowledge Translation (CKT).
+Given a set of fully labeled categories, CKT aims to translate the comparison knowledge learned from the labeled
+categories to a set of novel categories. To this end, we put forward a Comparison Classification Translation Network
+(CCT-Net), which comprises a comparison classifier and a matching discriminator. The comparison classifier is devised to
+classify whether two images belong to the same category or not, while the matching discriminator works together in an
+adversarial manner to ensure whether classified results match the truth. Exhaustive experiments show that CCT-Net
+achieves surprising generalization ability on unseen categories and SOTA performance on target categories.
 
 ![framework](figures/framework.png)
 
@@ -18,8 +37,10 @@ pip install -r requirements.txt
 ```
 
 ## Dataset Preparation
+
 It is quite convenient to prepare benchmark datasets or custom datasets by following these steps:
 Firstly, make each dataset in a unified **imagefolder** format:
+
 ```
 dataset/
    ├── class_1/
@@ -32,8 +53,10 @@ dataset/
    ├── ...    /
    └── class_n/
 ```
+
 Then, add all the category names into `classes.py`.
-After that, use the APIs in `utils/make_datasets.py` to convert the original imagefolder to what we need, including source, target (labelled and unlabelled), validation, and test dataset. 
+After that, use the APIs in `utils/make_datasets.py` to convert the original imagefolder to what we need, including
+source, target (labelled and unlabelled), validation, and test dataset.
 
 ## Training
 
@@ -59,12 +82,14 @@ Arguments:
 `--d-weights`: same as `--g-weights`  
 `--do-not-save`: action="store_true"  
 `--saving-interval`  
-`--remarks`: to take a note 
+`--remarks`: to take a note
 
 For example,
+
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 dist_train_gan.py --batch-size 8 --dataset mini-imagenet --sub 20-shot-src50-tgt50 --epochs 100 --g-weights ./weights/latest.pth --g-fs-tgt-steps 0 --g-steps 3
 ```
+
 <br/>
 To train the Comparison Classifier part, run `dist_train_g.py`
 
@@ -87,6 +112,7 @@ Arguments:
 `--remarks`: to take a note
 
 For example,
+
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 dist_train_g.py --batch-size 8 --dataset mini-imagenet --sub 20-shot-src50-tgt50 --epochs 100 --g-weights ./weights/latest.pth --lr 1e-4 --fs
 ```
@@ -106,9 +132,32 @@ Arguments:
 `--id`: checkpoint id, expressed as a datetime
 
 For example,
+
 ```bash
 CUDA_VISIBLE_DEVICES=1,3 python -m torch.distributed.launch --nproc_per_node=2 dist_test_gan.py --batch-size 30 --dataset mini-imagenet --id 01-14_17-41-03 --num-shot 30
 ```
+
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 dist_test_gan.py --batch-size 30 --dataset mini-imagenet --g-weights ./weights/latest.pth --num-shot 30
+```
+
+## Citation
+
+If you find the paper useful in your research, please consider citing:
+
+```bibtex
+@inproceedings{cct-net,
+  title     = {Comparison Knowledge Translation for Generalizable Image Classification},
+  author    = {Feng, Zunlei and Qiu, Tian and Wu, Sai and Jin, Xiaotuan and He, Zengliang and Song, Mingli and Wang, Huiqiong},
+  booktitle = {Proceedings of the Thirty-First International Joint Conference on
+               Artificial Intelligence, {IJCAI-22}},
+  publisher = {International Joint Conferences on Artificial Intelligence Organization},
+  editor    = {Lud De Raedt},
+  pages     = {2966--2972},
+  year      = {2022},
+  month     = {7},
+  note      = {Main Track},
+  doi       = {10.24963/ijcai.2022/411},
+  url       = {https://doi.org/10.24963/ijcai.2022/411},
+}
 ```
