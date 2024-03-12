@@ -2,9 +2,9 @@ Comparison Knowledge Translation for Generalizable Image Classification (CCT-Net
 =======
 
 [![version](https://img.shields.io/badge/Conference-IJCAI_2022-ff69b4)](https://ijcai-22.org/)
-&emsp;![code](https://img.shields.io/badge/Code-Official-brightgreen)
-&emsp;![doc](https://img.shields.io/badge/Docs-Latest-orange)
-&emsp;[![license](https://img.shields.io/badge/License-MIT-blue)](https://github.com/horrible-dong/QTClassification/blob/main/LICENSE)
+&emsp;[![code](https://img.shields.io/badge/Code-Official-brightgreen)]()
+&emsp;[![doc](https://img.shields.io/badge/Docs-Latest-orange)](README.md)
+&emsp;[![license](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
 > Authors: Zunlei Feng, Tian Qiu, Sai Wu, Xiaotuan Jin, Zengliang He, Mingli Song, Huiqiong Wang  
 > Affiliation: Zhejiang University  
